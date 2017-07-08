@@ -37,7 +37,7 @@ import okhttp3.Response;
  */
 
 public class ChooseAreaFragment extends Fragment {
-    public static final int LEVEL_PROVINEC=0;
+    public static final int LEVEL_PROVINCE=0;
     public static final int LEVEL_CITY=1;
     public static final int LEVEL_COUNTY=2;
     private ProgressDialog progressDialog;
@@ -83,7 +83,7 @@ public class ChooseAreaFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //点击的是省级时，去查询市级
-                if (currentLevel==LEVEL_PROVINEC){
+                if (currentLevel==LEVEL_PROVINCE){
                     selectedProvince=provinceList.get(position);
                     queryCities();
                 //点击的是市级时，去查询县级
@@ -138,7 +138,7 @@ public class ChooseAreaFragment extends Fragment {
             }
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
-            currentLevel=LEVEL_PROVINEC;
+            currentLevel=LEVEL_PROVINCE;
         }else{
             //如果没有读取到，就调用之前写的接口组装一个请求地址
             String address="http://guolin.tech/api/china";
