@@ -43,6 +43,8 @@ public class ChooseAreaFragment extends Fragment {
     private ProgressDialog progressDialog;
     private TextView titleText;
     private Button backButton;
+    private Button locationButton;
+    private Button aboutButton;
     private ListView listView;
     private ArrayAdapter<String>adapter;
     private List<String> dataList=new ArrayList<>();
@@ -68,10 +70,30 @@ public class ChooseAreaFragment extends Fragment {
         titleText=(TextView)view.findViewById(R.id.title_text);
         backButton=(Button)view.findViewById(R.id.back_button);
         listView=(ListView)view.findViewById(R.id.list_view);
+        locationButton=(Button)view.findViewById(R.id.location_button);
+        aboutButton=(Button)view.findViewById(R.id.about_button);
+
         //初始化ArrayAdapter
         adapter=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,dataList);
         //设置适配器
         listView.setAdapter(adapter);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),LocationActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+
+            }
+        });
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),AboutActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         return view;
     }
 

@@ -1,7 +1,11 @@
 package com.huangkun.duskweather;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -237,6 +241,21 @@ public class WeatherActivity extends AppCompatActivity {
             weatherLayout.setVisibility(View.VISIBLE);
             Intent intent=new Intent(this, AutoUpdateService.class);
             startService(intent);
+
+            Intent intent1=new Intent(this,WeatherActivity.class);
+            PendingIntent pi=PendingIntent.getActivity(this,0,intent1,0);
+            NotificationManager manager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+            Notification notification=new Notification.Builder(this)
+                    .setContentTitle(cityName)
+                    .setContentText(degree+"  "+weatherInfo)
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.mipmap.ic_app)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(),
+                            R.mipmap.ic_app))
+                    .setContentIntent(pi)
+                    .setAutoCancel(true)
+                    .build();
+            manager.notify(1,notification);
         }else{
             Toast.makeText(this, "获取填写信息失败", Toast.LENGTH_SHORT).show();
         }
